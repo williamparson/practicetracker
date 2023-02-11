@@ -17,4 +17,4 @@ function PracticeFormModal() {
   );
 }
 
-export default PracticeFormModal();
+export default PracticeFormModal;
