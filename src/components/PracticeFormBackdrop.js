@@ -1,6 +1,6 @@
 import React from "react";
-function PracticeFormBackdrop() {
-  return <div className='backdrop' />;
+function PracticeFormBackdrop(props) {
+  return <div className='backdrop' onClick={props.onCancel} />;
 }
 
 export default PracticeFormBackdrop;
