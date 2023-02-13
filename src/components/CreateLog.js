@@ -21,8 +21,10 @@ function CreateLog() {
       <button className='btn' onClick={formOpen}>
         Add practice
       </button>
-      {modalIsOpen && <PracticeFormModal onCancel={formClose} />}
-      {modalIsOpen && <PracticeFormBackdrop onCancel={formClose} onConfirm={formClose} />}
+      {modalIsOpen && (
+        <PracticeFormModal onCancel={formClose} onConfirm={formClose} />
+      )}
+      {modalIsOpen && <PracticeFormBackdrop onCancel={formClose} />}
     </div>
   );
 }

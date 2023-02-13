@@ -60,7 +60,10 @@ h1, h2 {
   position: fixed;
   top: 20vh;
   left: calc(50% - 15rem);
+  max-height: 60rem;
+  overflow-y: auto;
 }
+
 
 .backdrop {
   position: fixed;
