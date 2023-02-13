@@ -1,4 +1,5 @@
 import React from "react";
+import PracticeForm from "./PracticeForm";
 function PracticeFormModal(props) {
   function cancelHandler() {
     props.onCancel(); 
@@ -12,7 +13,7 @@ function PracticeFormModal(props) {
   return (
     <div className='modal'>
       <p>Practice Information</p>
-
+      <PracticeForm />
       <button className='btn btn--alt' onClick={cancelHandler}>
         Cancel
       </button>
