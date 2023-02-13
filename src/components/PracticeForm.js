@@ -9,6 +9,11 @@ function PracticeForm() {
   const descriptionInputRef = useRef();
   const durationInputRef = useRef();
   const [startDate, setStartDate] = useState(new Date());
+//below will handle interaction with backend api
+  function formSubmitHandler(){
+    
+  }
+//this function stores inputs after submission
   function submitHandler(event) {
     event.preventDefault();
 
@@ -18,9 +23,9 @@ function PracticeForm() {
 
     const practiceData = {
       date: enteredDate,
-      duration: enteredDuration, 
-      description: enteredDescription
-    }
+      duration: enteredDuration,
+      description: enteredDescription,
+    };
 
     console.log(practiceData);
   }
@@ -31,11 +36,17 @@ function PracticeForm() {
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
-        ref={dateInputRef}/>
+          ref={dateInputRef}
+        />
         <label htmlFor="duration">How long you practiced for: </label>
-        <input type="number" ref={dateInputRef}/>
+        <input type="number" ref={dateInputRef} />
         <label htmlFor="description">Describe what you practiced:</label>
-        <textarea id="description" required rows="5" ref={descriptionInputRef}></textarea>
+        <textarea
+          id="description"
+          required
+          rows="5"
+          ref={descriptionInputRef}
+        ></textarea>
       </div>
     </form>
   );
