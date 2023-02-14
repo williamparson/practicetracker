@@ -7,7 +7,7 @@ function PracticeFormModal(props) {
   }
   //these functions we create can be forwarded if necessary (like we did with the backdrop) or executed right in the file whose state they affect.
   function confirmHandler() {
-    console.log("running props onconfirm");
+    props.submitHandler();
     props.onConfirm();
   }
   return (

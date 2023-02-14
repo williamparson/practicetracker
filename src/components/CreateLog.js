@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import PracticeFormBackdrop from "./PracticeFormBackdrop";
 import PracticeFormModal from "./PracticeFormModal";
+import PracticeForm from "./PracticeForm";
 function CreateLog() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   //This is a react hook, which can only be called in react component functions (for our purposes)
@@ -18,11 +19,11 @@ function CreateLog() {
   }
   return (
     <div>
-      <button className="btn" onClick={formOpen}>
+      <button className='btn' onClick={formOpen}>
         Add practice
       </button>
       {modalIsOpen && (
-        <PracticeFormModal onCancel={formClose} onConfirm={formClose} />
+        <PracticeFormModal onCancel={formClose} onConfirm={formClose} submitHandler={PracticeForm.submitHandler}/>
       )}
       {modalIsOpen && <PracticeFormBackdrop onCancel={formClose} />}
     </div>
