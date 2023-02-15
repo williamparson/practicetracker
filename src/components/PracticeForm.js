@@ -3,7 +3,6 @@ import { useRef } from "react";
 import classes from "./NewMeetupForm.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import PracticeFormModal from "./PracticeFormModal";
 
 function PracticeForm() {
   const dateInputRef = useRef();
@@ -11,7 +10,6 @@ function PracticeForm() {
   const durationInputRef = useRef();
   const [startDate, setStartDate] = useState(new Date());
   //below will handle interaction with backend api
-  function formSubmitHandler() {}
   //this function stores inputs after submission
   function submitHandler(event) {
     event.preventDefault();
@@ -38,7 +36,7 @@ function PracticeForm() {
           ref={dateInputRef}
         />
         <label htmlFor='duration'>How many minutes you practiced for: </label>
-        <input type='number' ref={dateInputRef} />
+        <input type='number' ref={durationInputRef} />
         <label htmlFor='description'>Describe what you practiced:</label>
         <textarea
           id='description'
@@ -46,6 +44,9 @@ function PracticeForm() {
           rows='5'
           ref={descriptionInputRef}
         ></textarea>
+        </div>
+        <div className={classes.actions}>
+        <button>Submit</button>
       </div>
     </form>
   );
