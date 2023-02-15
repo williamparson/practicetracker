@@ -4,7 +4,7 @@ import classes from "./NewMeetupForm.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function PracticeForm() {
+function PracticeForm(props) {
   const dateInputRef = useRef();
   const descriptionInputRef = useRef();
   const durationInputRef = useRef();
@@ -25,27 +25,29 @@ function PracticeForm() {
     };
 
     console.log(practiceData);
+
+    props.onAddPractice(practiceData);
   }
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
-        <label htmlFor='date'>Date</label>
+        <label htmlFor="date">Date</label>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           ref={dateInputRef}
         />
-        <label htmlFor='duration'>How many minutes you practiced for: </label>
-        <input type='number' ref={durationInputRef} />
-        <label htmlFor='description'>Describe what you practiced:</label>
+        <label htmlFor="duration">How many minutes you practiced for: </label>
+        <input type="number" ref={durationInputRef} />
+        <label htmlFor="description">Describe what you practiced:</label>
         <textarea
-          id='description'
+          id="description"
           required
-          rows='5'
+          rows="5"
           ref={descriptionInputRef}
         ></textarea>
-        </div>
-        <div className={classes.actions}>
+      </div>
+      <div className={classes.actions}>
         <button>Submit</button>
       </div>
     </form>
