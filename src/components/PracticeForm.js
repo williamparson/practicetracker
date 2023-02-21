@@ -14,18 +14,20 @@ function PracticeForm(props) {
   function submitHandler(event) {
     event.preventDefault();
 
-    const enteredDate = dateInputRef.current.value;
+    const enteredMonth = startDate.getMonth();
+    const enteredDay = startDate.getDate();
     const enteredDuration = durationInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
 
     const practiceData = {
-      date: enteredDate,
+      day: enteredDay,
+      month: enteredMonth,
       duration: enteredDuration,
       description: enteredDescription,
     };
 
     console.log(practiceData);
-
+    
     props.onAddPractice(practiceData);
   }
   return (

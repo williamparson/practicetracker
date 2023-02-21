@@ -1,12 +1,11 @@
 import "./App.css";
 import React from "react";
-
-import CreateLog from "./components/CreateLog";
+import MainPage from "./components/MainPage";
 function App() {
   return (
     <div>
       <h1> Practice Tracker </h1>
-      <CreateLog />
+      <MainPage />
     </div>
   );
 }
