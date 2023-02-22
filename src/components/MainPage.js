@@ -1,32 +1,55 @@
 import React from "react";
 import CreateLog from "./CreateLog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TableEntry from "./TableEntry";
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [loadedPracticeData, setLoadedPracticeData] = useState([])
-  fetch(
-    "https://computer-science-ia-53874-default-rtdb.firebaseio.com/practices"
-  )
-    .then((response) => {
-      return response.json(); //exists as a default function, but returns a promise
-    })
-    .then((data) => {
+  const [loadedPracticeData, setLoadedPracticeData] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      "https://computer-science-ia-53874-default-rtdb.firebaseio.com/practices.json"
+    )
+      .then((response) => {
+        return response.json(); //exists as a default function, but returns a promise
+      })
+      .then((data) => {
+        const p = [];
+
+        for (const key in data) {
+          const practice = {
+            id: key,
+            ...data[key],
+          };
+          p.push(practice);
+        }
         setIsLoading(false);
-        setLoadedPracticeData(data);
-    });
-  if (isLoading) { //currently, this is triggering because there's no response from the database. however, use ! to get the normal return when hard coding
+        setLoadedPracticeData(p);
+      });
+  }, []);
+
+  if (isLoading) {
+    //currently, this is triggering because there's no response from the database. however, use ! to get the normal return when hard coding
     return (
-        <div>
+      <div>
         <CreateLog />
         <p>Loading...</p>
-        </div>
+      </div>
     );
   }
   return (
     <div>
       <CreateLog />
-      <TableEntry month = {"1"} date = {"4"} description = {"asdf"} duration = {"12"}/>
+      {loadedPracticeData.map((d) => {
+        return (
+          <TableEntry
+            date={d["day"]}
+            month={d["month"]}
+            description={d["description"]}
+            duration={d["duration"]}
+          />
+        );
+      })}
     </div>
   );
 }
