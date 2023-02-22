@@ -2,6 +2,8 @@ import React from "react";
 import CreateLog from "./CreateLog";
 import { useState, useEffect } from "react";
 import TableEntry from "./TableEntry";
+import "./MainPage.css";
+
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedPracticeData, setLoadedPracticeData] = useState([]);
@@ -38,8 +40,14 @@ function MainPage() {
     );
   }
   return (
-    <div>
+    <div className="container">
       <CreateLog />
+      <div className="header">
+        <h1>Date</h1>
+        <h1>Minutes</h1>
+        <h1>Description</h1>
+      </div>
+      <br />
       {loadedPracticeData.map((d) => {
         return (
           <TableEntry
@@ -52,5 +60,10 @@ function MainPage() {
       })}
     </div>
   );
+  
+  
+  
+  
+  
 }
 export default MainPage;
