@@ -40,30 +40,31 @@ function MainPage() {
     );
   }
   return (
-    <div className="container">
+    <div>
       <CreateLog />
-      <div className="header">
-        <h1>Date</h1>
-        <h1>Minutes</h1>
-        <h1>Description</h1>
+      <div className="container">
+        <div className="header">
+          <h1>Date</h1>
+          <h1>Minutes</h1>
+          <h1>Description</h1>
+        </div>
+        <br />
+        <br />
+        {loadedPracticeData.map((d) => {
+          return (
+            <div>
+            <TableEntry
+              date={d["day"]}
+              month={d["month"]}
+              description={d["description"]}
+              duration={d["duration"]}
+            /> 
+            <br />
+            </div>
+          );
+        })}
       </div>
-      <br />
-      {loadedPracticeData.map((d) => {
-        return (
-          <TableEntry
-            date={d["day"]}
-            month={d["month"]}
-            description={d["description"]}
-            duration={d["duration"]}
-          />
-        );
-      })}
     </div>
   );
-  
-  
-  
-  
-  
 }
 export default MainPage;
