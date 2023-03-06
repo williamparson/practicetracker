@@ -53,6 +53,7 @@ function MainPage() {
         {loadedPracticeData.map((d) => {
           return (
             <div>
+              <br />
             <TableEntry
               date={d["day"]}
               month={d["month"]}
