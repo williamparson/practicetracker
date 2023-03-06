@@ -51,13 +51,12 @@ function MainPage() {
         {loadedPracticeData.map((d) => {
           return (
             <div>
-            <TableEntry
-              date={d["day"]}
-              month={d["month"]}
-              description={d["description"]}
-              duration={d["duration"]}
-            /> 
-
+              <TableEntry
+                date={d["day"]}
+                month={d["month"]}
+                description={d["description"]}
+                duration={d["duration"]}
+              />
             </div>
           );
         })}
