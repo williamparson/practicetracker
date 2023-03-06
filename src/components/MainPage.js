@@ -42,25 +42,22 @@ function MainPage() {
   return (
     <div>
       <CreateLog />
-      <div className="container">
+      <div>
         <div className="header">
           <h1>Date</h1>
           <h1>Minutes</h1>
           <h1>Description</h1>
         </div>
-        <br />
-        <br />
         {loadedPracticeData.map((d) => {
           return (
             <div>
-              <br />
             <TableEntry
               date={d["day"]}
               month={d["month"]}
               description={d["description"]}
               duration={d["duration"]}
             /> 
-            <br />
+
             </div>
           );
         })}
