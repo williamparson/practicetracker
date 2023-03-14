@@ -11,7 +11,6 @@ function CreateLog() {
   //first element contains currently stored value
   //second element contains a function that is used to change the value of the function, hence the name
   function formOpen() {
-    console.log("clicked the add button");
     setModalIsOpen(true);
   }
   function formClose() {

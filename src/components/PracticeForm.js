@@ -25,8 +25,6 @@ function PracticeForm(props) {
       duration: enteredDuration,
       description: enteredDescription,
     };
-
-    console.log(practiceData);
     
     props.onAddPractice(practiceData);
   }
