@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRef } from "react";
-import classes from "./NewMeetupForm.module.css";
+import classes from "./PracticeForm.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

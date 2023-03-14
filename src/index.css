@@ -17,20 +17,20 @@ h1, h2 {
   padding: 0.5rem 1.5rem;
   cursor: pointer;
   border-radius: 4px;
-  background-color: #800040;
+  background-color: #04B9BC;
   color: white;
-  border: 1px solid #800040;
+  border: 1px solid #04B9BC;
   margin: 0 1rem;
 }
 
 .btn:hover {
-  background-color: #9c1458;
-  border-color: #9c1458;
+  background-color: #019A9C;
+  border-color: #019A9C;
 }
 
 .btn--alt {
   background-color: transparent;
-  color: #800040;
+  color: #04B9BC;
 }
 
 .btn--alt:hover {
