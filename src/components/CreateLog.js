@@ -4,8 +4,6 @@ import PracticeFormBackdrop from "./PracticeFormBackdrop";
 import PracticeFormModal from "./PracticeFormModal";
 import PracticeForm from "./PracticeForm";
 function CreateLog(props) {
-
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
   function formOpen() {
     setModalIsOpen(true);
@@ -14,16 +12,20 @@ function CreateLog(props) {
     setModalIsOpen(false);
   }
   useEffect(() => {
-    props.onVariableChange(modalIsOpen)
-  }, [!modalIsOpen])
+    props.onVariableChange(modalIsOpen);
+  }, [!modalIsOpen]);
 
   return (
     <div>
-      <button className='btn' onClick={formOpen}>
+      <button className="btn" onClick={formOpen}>
         Add practice
       </button>
       {modalIsOpen && (
-        <PracticeFormModal onCancel={formClose} onConfirm={formClose} submitHandler={PracticeForm.submitHandler}/>
+        <PracticeFormModal
+          onCancel={formClose}
+          onConfirm={formClose}
+          submitHandler={PracticeForm.submitHandler}
+        />
       )}
       {modalIsOpen && <PracticeFormBackdrop onCancel={formClose} />}
     </div>

@@ -39,14 +39,14 @@ function MainPage() {
   if (isLoading) {
     return (
       <div>
-        <CreateLog onVariableChange={handleChildVariableChange}/>
+        <CreateLog onVariableChange={handleChildVariableChange} />
         <p>Loading...</p>
       </div>
     );
   }
   return (
     <div>
-      <CreateLog onVariableChange={handleChildVariableChange}/>
+      <CreateLog onVariableChange={handleChildVariableChange} />
       <div>
         <div className="header">
           <h1>Date</h1>
