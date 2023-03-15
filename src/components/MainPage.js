@@ -7,7 +7,13 @@ import "./MainPage.css";
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedPracticeData, setLoadedPracticeData] = useState([]);
+  const [shouldRerun, setShouldRerun] = useState(false);
 
+  function handleChildVariableChange(value) {
+    if (value === false) {
+      setShouldRerun(true);
+    }
+  }
   useEffect(() => {
     fetch(
       "https://computer-science-ia-53874-default-rtdb.firebaseio.com/practices.json"
@@ -28,20 +34,19 @@ function MainPage() {
         setIsLoading(false);
         setLoadedPracticeData(p);
       });
-  }, []);
+  }, [shouldRerun, []]);
 
   if (isLoading) {
-    //currently, this is triggering because there's no response from the database. however, use ! to get the normal return when hard coding
     return (
       <div>
-        <CreateLog />
+        <CreateLog onVariableChange={handleChildVariableChange}/>
         <p>Loading...</p>
       </div>
     );
   }
   return (
     <div>
-      <CreateLog />
+      <CreateLog onVariableChange={handleChildVariableChange}/>
       <div>
         <div className="header">
           <h1>Date</h1>

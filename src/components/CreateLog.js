@@ -1,21 +1,22 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PracticeFormBackdrop from "./PracticeFormBackdrop";
 import PracticeFormModal from "./PracticeFormModal";
 import PracticeForm from "./PracticeForm";
-function CreateLog() {
+function CreateLog(props) {
+
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  //This is a react hook, which can only be called in react component functions (for our purposes)
-  //argument passed in here is an initial value for the state. It'll be changed depending on what sequences of buttons the user clicks later.
-  //useState returns an array with exactly 2 elements, so that's how we'll define it
-  //first element contains currently stored value
-  //second element contains a function that is used to change the value of the function, hence the name
   function formOpen() {
     setModalIsOpen(true);
   }
   function formClose() {
     setModalIsOpen(false);
   }
+  useEffect(() => {
+    props.onVariableChange(modalIsOpen)
+  }, [!modalIsOpen])
+
   return (
     <div>
       <button className='btn' onClick={formOpen}>
