@@ -1,5 +1,10 @@
 import React from "react";
 import FormHandler from "./FormHandler";
+/*
+Some of the processes in this code were adapted from those found in the
+Academind React tutorial: https://youtu.be/Dorf8i6lCuk
+Accessed January 2023
+*/
 function PracticeFormModal(props) {
   function cancelHandler() {
     props.onCancel();

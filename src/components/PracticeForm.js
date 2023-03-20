@@ -4,12 +4,19 @@ import classes from "./PracticeForm.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+/*
+Some of the processes in this code were adapted from those found in the
+Academind React tutorial: https://youtu.be/Dorf8i6lCuk
+Accessed January 2023
+
+React Datepicker used as well - https://github.com/Hacker0x01/react-datepicker
+Accessed January 2023
+*/
 function PracticeForm(props) {
   const dateInputRef = useRef();
   const descriptionInputRef = useRef();
   const durationInputRef = useRef();
   const [startDate, setStartDate] = useState(new Date());
-  //below will handle interaction with backend api
   //this function stores inputs after submission
   function submitHandler(event) {
     event.preventDefault();
@@ -25,7 +32,7 @@ function PracticeForm(props) {
       duration: enteredDuration,
       description: enteredDescription,
     };
-    
+
     props.onAddPractice(practiceData);
   }
   return (

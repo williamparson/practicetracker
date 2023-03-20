@@ -4,6 +4,11 @@ import { useState, useEffect } from "react";
 import TableEntry from "./TableEntry";
 import "./MainPage.css";
 
+/*
+Some of the processes in this code were adapted from those found in the
+Academind React tutorial: https://youtu.be/Dorf8i6lCuk
+Accessed January 2023
+*/
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedPracticeData, setLoadedPracticeData] = useState([]);
@@ -19,7 +24,7 @@ function MainPage() {
       "https://computer-science-ia-53874-default-rtdb.firebaseio.com/practices.json"
     )
       .then((response) => {
-        return response.json(); //exists as a default function, but returns a promise
+        return response.json(); 
       })
       .then((data) => {
         const p = [];

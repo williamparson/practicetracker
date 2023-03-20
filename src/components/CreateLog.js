@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import PracticeFormBackdrop from "./PracticeFormBackdrop";
 import PracticeFormModal from "./PracticeFormModal";
 import PracticeForm from "./PracticeForm";
+/*
+Some of the processes in this code were adapted from those found in the
+Academind React tutorial: https://youtu.be/Dorf8i6lCuk
+Accessed January 2023
+*/
 function CreateLog(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   function formOpen() {
