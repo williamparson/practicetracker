@@ -3,75 +3,85 @@ import CreateLog from "./CreateLog";
 import { useState, useEffect } from "react";
 import TableEntry from "./TableEntry";
 import "./MainPage.css";
+import { getPractices } from "../services/practiceStorage";
 
-/*
-Some of the processes in this code were adapted from those found in the
-Academind React tutorial: https://youtu.be/Dorf8i6lCuk
-Accessed January 2023
-*/
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedPracticeData, setLoadedPracticeData] = useState([]);
-  const [shouldRerun, setShouldRerun] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [error, setError] = useState(null);
 
-  function handleChildVariableChange(value) {
-    if (value === false) {
-      setShouldRerun(true);
-    }
-  }
   useEffect(() => {
-    fetch(
-      "https://computer-science-ia-53874-default-rtdb.firebaseio.com/practices.json"
-    )
-      .then((response) => {
-        return response.json(); 
+    setIsLoading(true);
+    setError(null);
+
+    getPractices()
+      .then((practices) => {
+        const sorted = [...practices].sort((a, b) => {
+          const dateA = new Date(a.year, a.month, a.day);
+          const dateB = new Date(b.year, b.month, b.day);
+          return dateB - dateA;
+        });
+        setLoadedPracticeData(sorted);
       })
-      .then((data) => {
-        const p = [];
-
-        for (const key in data) {
-          const practice = {
-            id: key,
-            ...data[key],
-          };
-          p.push(practice);
-        }
+      .catch(() => {
+        setError("Could not load practice sessions.");
+      })
+      .finally(() => {
         setIsLoading(false);
-        setLoadedPracticeData(p);
       });
-  }, [shouldRerun, []]);
+  }, [refreshKey]);
 
-  if (isLoading) {
-    return (
-      <div>
-        <CreateLog onVariableChange={handleChildVariableChange} />
-        <p>Loading...</p>
-      </div>
-    );
+  function handlePracticeAdded() {
+    setRefreshKey((current) => current + 1);
   }
+
+  const totalMinutes = loadedPracticeData.reduce(
+    (sum, entry) => sum + Number(entry.duration || 0),
+    0
+  );
+
   return (
     <div>
-      <CreateLog onVariableChange={handleChildVariableChange} />
-      <div>
-        <div className="header">
-          <h1>Date</h1>
-          <h1>Minutes</h1>
-          <h1>Description</h1>
-        </div>
-        {loadedPracticeData.map((d) => {
-          return (
-            <div>
-              <TableEntry
-                date={d["day"]}
-                month={d["month"]}
-                description={d["description"]}
-                duration={d["duration"]}
-              />
+      <CreateLog onPracticeAdded={handlePracticeAdded} />
+      {error && <p className="error-message">{error}</p>}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <p className="summary">
+            {loadedPracticeData.length} session
+            {loadedPracticeData.length === 1 ? "" : "s"} logged · {totalMinutes}{" "}
+            total minutes
+          </p>
+          <div>
+            <div className="header">
+              <h1>Date</h1>
+              <h1>Minutes</h1>
+              <h1>Description</h1>
             </div>
-          );
-        })}
-      </div>
+            {loadedPracticeData.length === 0 ? (
+              <p className="empty-state">
+                No practice sessions yet. Click &quot;Add practice&quot; to log your
+                first session.
+              </p>
+            ) : (
+              loadedPracticeData.map((entry) => (
+                <TableEntry
+                  key={entry.id}
+                  day={entry.day}
+                  month={entry.month}
+                  year={entry.year}
+                  description={entry.description}
+                  duration={entry.duration}
+                />
+              ))
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
+
 export default MainPage;

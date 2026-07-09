@@ -1,61 +1,63 @@
 import React, { useState } from "react";
-import { useRef } from "react";
 import classes from "./PracticeForm.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-/*
-Some of the processes in this code were adapted from those found in the
-Academind React tutorial: https://youtu.be/Dorf8i6lCuk
-Accessed January 2023
-
-React Datepicker used as well - https://github.com/Hacker0x01/react-datepicker
-Accessed January 2023
-*/
-function PracticeForm(props) {
-  const dateInputRef = useRef();
-  const descriptionInputRef = useRef();
-  const durationInputRef = useRef();
+function PracticeForm({ onAddPractice }) {
   const [startDate, setStartDate] = useState(new Date());
-  //this function stores inputs after submission
+
   function submitHandler(event) {
     event.preventDefault();
 
-    const enteredMonth = startDate.getMonth();
-    const enteredDay = startDate.getDate();
-    const enteredDuration = durationInputRef.current.value;
-    const enteredDescription = descriptionInputRef.current.value;
+    const form = event.target;
+    const duration = form.duration.value.trim();
+    const description = form.description.value.trim();
+
+    if (!duration || Number(duration) <= 0) {
+      return;
+    }
 
     const practiceData = {
-      day: enteredDay,
-      month: enteredMonth,
-      duration: enteredDuration,
-      description: enteredDescription,
+      day: startDate.getDate(),
+      month: startDate.getMonth(),
+      year: startDate.getFullYear(),
+      duration: Number(duration),
+      description,
     };
 
-    props.onAddPractice(practiceData);
+    onAddPractice(practiceData);
+    form.reset();
+    setStartDate(new Date());
   }
+
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
         <label htmlFor="date">Date</label>
         <DatePicker
+          id="date"
           selected={startDate}
           onChange={(date) => setStartDate(date)}
-          ref={dateInputRef}
+          maxDate={new Date()}
         />
-        <label htmlFor="duration">How many minutes you practiced for: </label>
-        <input type="number" ref={durationInputRef} />
+        <label htmlFor="duration">How many minutes you practiced for:</label>
+        <input
+          id="duration"
+          name="duration"
+          type="number"
+          min="1"
+          required
+        />
         <label htmlFor="description">Describe what you practiced:</label>
         <textarea
           id="description"
+          name="description"
           required
           rows="5"
-          ref={descriptionInputRef}
         ></textarea>
       </div>
       <div className={classes.actions}>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </div>
     </form>
   );
