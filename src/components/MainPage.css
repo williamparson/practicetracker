@@ -16,3 +16,19 @@ h1 {
   margin: 0;
   text-align: center;
 }
+
+.summary {
+  margin: 1rem 0;
+  font-weight: bold;
+  color: #333333;
+}
+
+.empty-state {
+  margin-top: 1rem;
+  color: #555555;
+}
+
+.error-message {
+  color: #b00020;
+  font-weight: bold;
+}
